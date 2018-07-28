@@ -1,9 +1,22 @@
 const electron = require('electron');
+const ffmpeg = require('fluent-ffmpeg');
 
-const { app, BrowserWindow } = electron;
+const { app, BrowserWindow, ipcMain } = electron;
 
 app.on('ready', () => {
    const mainWindow = new BrowserWindow({ });
    mainWindow.loadURL(`file://${__dirname}/index.html`);
 });
+
+ipcMain.on('video:submit', (event, path) => {
+    console.log('ipcMain : ', path);
+
+    const ffprobepath = require('@ffprobe-installer/ffprobe').path;
+    ffmpeg.setFfprobePath(ffprobepath);
+    ffmpeg.ffprobe(path, (err, metadata) => {
+        console.log(err);
+        console.log('File length is : ', metadata.format.duration);
+    });
+});
+
 

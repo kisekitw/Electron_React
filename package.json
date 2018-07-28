@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "electron": "electron ."
+    "electron": "electron . --enable-logging"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ffprobe-installer/ffprobe": "^1.0.9",
     "electron": "^2.0.5",
     "fluent-ffmpeg": "^2.1.2"
   }
